@@ -1,0 +1,3 @@
+This is a simple Qt/C++ project explained in detail in the blog post: [How to embed a database in your application with SQLite and Qt](http://blog.davidecoppola.com/2016/11/howto-embed-data…th-sqlite-and-qt/).
+
+It shows how to use SQLite and Qt SQL to add a relational database to an application.
