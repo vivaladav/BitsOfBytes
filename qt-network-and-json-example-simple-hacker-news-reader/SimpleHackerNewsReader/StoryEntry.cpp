@@ -15,7 +15,7 @@ StoryEntry::StoryEntry(int index, const QJsonObject & obj, QWidget * parent) : Q
 	// -- NEWS URL --
 	QJsonObject::const_iterator it = obj.constFind("url");
 
-	if(it != obj.end())
+	if(it != obj.constEnd())
 		mURL.setUrl(it.value().toString());
 	else
 		mURL.setUrl(QString("https://news.ycombinator.com/item?id=%1").arg(obj["id"].toInt()));
