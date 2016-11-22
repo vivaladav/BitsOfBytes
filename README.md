@@ -4,6 +4,9 @@ In this repository you can find source code and projects from my [blog](http://b
 All the content here is released under The Unlicense license unless stated otherwise in a sub-directory.
 
 ## Examples
+### Qt Network and JSON example: a simple Hacker News reader
+[blog post](http://blog.davidecoppola.com/2016/11/qt-network-and-json-example-simple-hacker-news-reader/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/qt-network-and-json-example-simple-hacker-news-reader)
+
 ### How to embed a database in your application with SQLite and Qt
 [blog post](http://blog.davidecoppola.com/2016/11/howto-embed-database-in-application-with-sqlite-and-qt/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/howto-embed-database-in-application-with-sqlite-and-qt/)
 
