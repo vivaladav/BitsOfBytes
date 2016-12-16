@@ -28,10 +28,12 @@ typedef struct CPUData
 	size_t times[NUM_CPU_STATES];
 } CPUData;
 
-void ReadStats(std::vector<CPUData> & entries);
+void ReadStatsCPU(std::vector<CPUData> & entries);
 
-size_t GetIdleTime(const CPUData & entry1, const CPUData & entry2);
-size_t GetActiveTime(const CPUData & entry1, const CPUData & entry2);
+size_t GetIdleTime(const CPUData & e1, const CPUData & e2);
+size_t GetActiveTime(const CPUData & e1, const CPUData & e2);
+
+void PrintStats(const std::vector<CPUData> & entries1, const std::vector<CPUData> & entries2);
 
 int main(int argc, char * argv[])
 {
@@ -39,47 +41,23 @@ int main(int argc, char * argv[])
 	std::vector<CPUData> entries2;
 
 	// snapshot 1
-	ReadStats(entries1);
+	ReadStatsCPU(entries1);
 
 	// 100ms pause
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 	// snapshot 2
-	ReadStats(entries2);
+	ReadStatsCPU(entries2);
 
-	// -- PRINT TIMES --
-	for(unsigned int i = 0; i < entries1.size(); ++i)
-	{
-		CPUData & entry1 = entries1[i];
-		CPUData & entry2 = entries2[i];
-
-		std::cout << entry1.cpu << std::endl; 
-			
-		const size_t ACTIVE_TIME	= GetActiveTime(entry1, entry2);
-		const size_t IDLE_TIME		= GetIdleTime(entry1, entry2);
-		const size_t TOTAL_TIME		= ACTIVE_TIME + IDLE_TIME;
-
-		std::cout << "active: ";
-		std::cout.setf(std::ios::fixed, std:: ios::floatfield);
-        std::cout.width(6);
-        std::cout.precision(2);
-		std::cout << (100.f * static_cast<float>(ACTIVE_TIME) / static_cast<float>(TOTAL_TIME)) << "%" << std::endl;
-
-		std::cout << "idle:   ";
-		std::cout.setf(std::ios::fixed, std:: ios::floatfield);
-        std::cout.width(6);
-        std::cout.precision(2);
-		std::cout << (100.f * static_cast<float>(IDLE_TIME) / static_cast<float>(TOTAL_TIME)) << "%" << std::endl;
-
-		std::cout << std::endl;
-	}
+	// print output
+	PrintStats(entries1, entries2);
 
 	return 0;
 }
 
-void ReadStats(std::vector<CPUData> & entries)
+void ReadStatsCPU(std::vector<CPUData> & entries)
 {
-    std::ifstream fileStat("/proc/stat");
+	std::ifstream fileStat("/proc/stat");
 
 	std::string line;
 
@@ -90,11 +68,13 @@ void ReadStats(std::vector<CPUData> & entries)
 	while(std::getline(fileStat, line))
 	{
 		// cpu stats line found
-		if(0 == line.compare(0, LEN_STR_CPU, STR_CPU))
+		if(!line.compare(0, LEN_STR_CPU, STR_CPU))
 		{
 			std::istringstream ss(line);
 
-			CPUData entry;
+			// store entry
+			entries.emplace_back(CPUData());
+			CPUData & entry = entries.back();
 
 			// read cpu label
 			ss >> entry.cpu;
@@ -109,27 +89,55 @@ void ReadStats(std::vector<CPUData> & entries)
 			// read times
 			for(int i = 0; i < NUM_CPU_STATES; ++i)
 				ss >> entry.times[i];
-
-			// store entry
-			entries.emplace_back(entry);
 		}
 	}
 }
 
-size_t GetIdleTime(const CPUData & entry1, const CPUData & entry2)
+size_t GetIdleTime(const CPUData & e1, const CPUData & e2)
 {
-	return (entry2.times[S_IDLE] - entry1.times[S_IDLE]) + (entry2.times[S_IOWAIT] - entry1.times[S_IOWAIT]);
+	return	(e2.times[S_IDLE] - e1.times[S_IDLE]) +
+			(e2.times[S_IOWAIT] - e1.times[S_IOWAIT]);
 }
 
-size_t GetActiveTime(const CPUData & entry1, const CPUData & entry2)
+size_t GetActiveTime(const CPUData & e1, const CPUData & e2)
 {
-	return	(entry2.times[S_USER] - entry1.times[S_USER]) +
-			(entry2.times[S_NICE] - entry1.times[S_NICE]) +
-			(entry2.times[S_SYSTEM] - entry1.times[S_SYSTEM]) +
-			(entry2.times[S_IRQ] - entry1.times[S_IRQ]) +
-			(entry2.times[S_SOFTIRQ] - entry1.times[S_SOFTIRQ]) +
-			(entry2.times[S_STEAL] - entry1.times[S_STEAL]) +
-			(entry2.times[S_GUEST] - entry1.times[S_GUEST]) + 
-			(entry2.times[S_GUEST_NICE] - entry1.times[S_GUEST_NICE]);
+	return	(e2.times[S_USER] - e1.times[S_USER]) +
+			(e2.times[S_NICE] - e1.times[S_NICE]) +
+			(e2.times[S_SYSTEM] - e1.times[S_SYSTEM]) +
+			(e2.times[S_IRQ] - e1.times[S_IRQ]) +
+			(e2.times[S_SOFTIRQ] - e1.times[S_SOFTIRQ]) +
+			(e2.times[S_STEAL] - e1.times[S_STEAL]) +
+			(e2.times[S_GUEST] - e1.times[S_GUEST]) +
+			(e2.times[S_GUEST_NICE] - e1.times[S_GUEST_NICE]);
 }
 
+void PrintStats(const std::vector<CPUData> & entries1, const std::vector<CPUData> & entries2)
+{
+	const size_t NUM_ENTRIES = entries1.size();
+
+	for(size_t i = 0; i < NUM_ENTRIES; ++i)
+	{
+		const CPUData & e1 = entries1[i];
+		const CPUData & e2 = entries2[i];
+
+		std::cout << e1.cpu << std::endl;
+
+		const float ACTIVE_TIME		= static_cast<float>(GetActiveTime(e1, e2));
+		const float IDLE_TIME		= static_cast<float>(GetIdleTime(e1, e2));
+		const float TOTAL_TIME		= ACTIVE_TIME + IDLE_TIME;
+
+		std::cout << "active: ";
+		std::cout.setf(std::ios::fixed, std::ios::floatfield);
+		std::cout.width(6);
+		std::cout.precision(2);
+		std::cout << (100.f * ACTIVE_TIME / TOTAL_TIME) << "%";
+
+		std::cout << " - idle: ";
+		std::cout.setf(std::ios::fixed, std::ios::floatfield);
+		std::cout.width(6);
+		std::cout.precision(2);
+		std::cout << (100.f * IDLE_TIME / TOTAL_TIME) << "%" << std::endl;
+
+		std::cout << std::endl;
+	}
+}
