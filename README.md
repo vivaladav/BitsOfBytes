@@ -4,6 +4,9 @@ In this repository you can find source code and projects from my [blog](http://b
 All the content here is released under The Unlicense license unless stated otherwise in a sub-directory.
 
 ## Examples
+### A C++ program to get CPU usage from command line in Linux
+[blog post](http://blog.davidecoppola.com/2016/12/cpp-program-to-get-cpu-usage-from-command-line-in-linux/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/cpp-program-to-get-cpu-usage-from-command-line-in-linux)
+
 ### Qt Network and JSON example: a simple Hacker News reader
 [blog post](http://blog.davidecoppola.com/2016/11/qt-network-and-json-example-simple-hacker-news-reader/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/qt-network-and-json-example-simple-hacker-news-reader)
 
