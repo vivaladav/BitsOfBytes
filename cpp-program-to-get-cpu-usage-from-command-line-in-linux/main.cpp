@@ -120,7 +120,8 @@ void PrintStats(const std::vector<CPUData> & entries1, const std::vector<CPUData
 		const CPUData & e1 = entries1[i];
 		const CPUData & e2 = entries2[i];
 
-		std::cout << e1.cpu << std::endl;
+		std::cout.width(3);
+		std::cout << e1.cpu << "] ";
 
 		const float ACTIVE_TIME		= static_cast<float>(GetActiveTime(e1, e2));
 		const float IDLE_TIME		= static_cast<float>(GetIdleTime(e1, e2));
@@ -137,7 +138,5 @@ void PrintStats(const std::vector<CPUData> & entries1, const std::vector<CPUData
 		std::cout.width(6);
 		std::cout.precision(2);
 		std::cout << (100.f * IDLE_TIME / TOTAL_TIME) << "%" << std::endl;
-
-		std::cout << std::endl;
 	}
 }
