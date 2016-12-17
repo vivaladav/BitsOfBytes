@@ -30,8 +30,8 @@ typedef struct CPUData
 
 void ReadStatsCPU(std::vector<CPUData> & entries);
 
-size_t GetIdleTime(const CPUData & e1, const CPUData & e2);
-size_t GetActiveTime(const CPUData & e1, const CPUData & e2);
+size_t GetIdleTime(const CPUData & e);
+size_t GetActiveTime(const CPUData & e);
 
 void PrintStats(const std::vector<CPUData> & entries1, const std::vector<CPUData> & entries2);
 
@@ -93,22 +93,22 @@ void ReadStatsCPU(std::vector<CPUData> & entries)
 	}
 }
 
-size_t GetIdleTime(const CPUData & e1, const CPUData & e2)
+size_t GetIdleTime(const CPUData & e)
 {
-	return	(e2.times[S_IDLE] - e1.times[S_IDLE]) +
-			(e2.times[S_IOWAIT] - e1.times[S_IOWAIT]);
+	return	e.times[S_IDLE] + 
+			e.times[S_IOWAIT];
 }
 
-size_t GetActiveTime(const CPUData & e1, const CPUData & e2)
+size_t GetActiveTime(const CPUData & e)
 {
-	return	(e2.times[S_USER] - e1.times[S_USER]) +
-			(e2.times[S_NICE] - e1.times[S_NICE]) +
-			(e2.times[S_SYSTEM] - e1.times[S_SYSTEM]) +
-			(e2.times[S_IRQ] - e1.times[S_IRQ]) +
-			(e2.times[S_SOFTIRQ] - e1.times[S_SOFTIRQ]) +
-			(e2.times[S_STEAL] - e1.times[S_STEAL]) +
-			(e2.times[S_GUEST] - e1.times[S_GUEST]) +
-			(e2.times[S_GUEST_NICE] - e1.times[S_GUEST_NICE]);
+	return	e.times[S_USER] +
+			e.times[S_NICE] +
+			e.times[S_SYSTEM] +
+			e.times[S_IRQ] +
+			e.times[S_SOFTIRQ] +
+			e.times[S_STEAL] +
+			e.times[S_GUEST] +
+			e.times[S_GUEST_NICE];
 }
 
 void PrintStats(const std::vector<CPUData> & entries1, const std::vector<CPUData> & entries2)
@@ -123,9 +123,9 @@ void PrintStats(const std::vector<CPUData> & entries1, const std::vector<CPUData
 		std::cout.width(3);
 		std::cout << e1.cpu << "] ";
 
-		const float ACTIVE_TIME		= static_cast<float>(GetActiveTime(e1, e2));
-		const float IDLE_TIME		= static_cast<float>(GetIdleTime(e1, e2));
-		const float TOTAL_TIME		= ACTIVE_TIME + IDLE_TIME;
+		const float ACTIVE_TIME	= static_cast<float>(GetActiveTime(e2) - GetActiveTime(e1));
+		const float IDLE_TIME	= static_cast<float>(GetIdleTime(e2) - GetIdleTime(e1));
+		const float TOTAL_TIME	= ACTIVE_TIME + IDLE_TIME;
 
 		std::cout << "active: ";
 		std::cout.setf(std::ios::fixed, std::ios::floatfield);
