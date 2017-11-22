@@ -4,6 +4,9 @@ In this repository you can find source code and projects from my [blog](http://b
 All the content here is released under The Unlicense license unless stated otherwise in a sub-directory.
 
 ## Examples
+### C++ unit testing with Qt Test - part 1 - introduction
+[blog post](http://blog.davidecoppola.com/2017/11/cpp-unit-testing-with-qt-test-introduction/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/cpp-unit-testing-with-qt-test-introduction/QtTestIntroduction)
+
 ### A C++ program to get CPU usage from command line in Linux
 [blog post](http://blog.davidecoppola.com/2016/12/cpp-program-to-get-cpu-usage-from-command-line-in-linux/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/cpp-program-to-get-cpu-usage-from-command-line-in-linux)
 
