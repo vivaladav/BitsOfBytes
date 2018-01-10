@@ -15,11 +15,11 @@ PanelConcat::PanelConcat(QWidget *parent)
 	setMinimumWidth(MIN_W);
 	setMinimumHeight(MIN_H);
 
-	QVBoxLayout * layout = new QVBoxLayout(this);
+	QVBoxLayout * layout = new QVBoxLayout;
 	setLayout(layout);
 
 	// -- ROW 0 --
-	QHBoxLayout * layoutRow = new QHBoxLayout(this);
+	QHBoxLayout * layoutRow = new QHBoxLayout;
 	layout->addLayout(layoutRow);
 
 	mInputA = new QLineEdit(this);
@@ -34,7 +34,7 @@ PanelConcat::PanelConcat(QWidget *parent)
 	layout->addSpacerItem(new QSpacerItem(1, 10, QSizePolicy::Expanding, QSizePolicy::Minimum));
 
 	// -- ROW 1 --
-	layoutRow = new QHBoxLayout(this);
+	layoutRow = new QHBoxLayout;
 	layout->addLayout(layoutRow);
 
 	layoutRow->addSpacerItem(new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Maximum));
