@@ -24,86 +24,86 @@ private slots:
 	void TestSignals();
 
 private:
-	PanelConcat panel;
+	PanelConcat mPanel;
 };
 
 void TestPanelConcat::init()
 {
-	panel.CancelData();
+	mPanel.CancelData();
 }
 
 void TestPanelConcat::TestFocusOrder()
 {
 	// enables focus and widget events
-	QApplication::setActiveWindow(&panel);
+	QApplication::setActiveWindow(&mPanel);
 
 	// set initial focus
-	panel.mInputA->setFocus();
-	QVERIFY2(panel.mInputA->hasFocus(), "Input A didn't get focus");
+	mPanel.mInputA->setFocus();
+	QVERIFY2(mPanel.mInputA->hasFocus(), "Input A didn't get focus");
 
 	// move focus to next widget
-	QTest::keyClick(&panel, Qt::Key_Tab);
-	QVERIFY2(panel.mInputB->hasFocus(), "Input B didn't get focus");
+	QTest::keyClick(&mPanel, Qt::Key_Tab);
+	QVERIFY2(mPanel.mInputB->hasFocus(), "Input B didn't get focus");
 
 	// move focus to next widget
-	QTest::keyClick(&panel, Qt::Key_Tab);
-	QVERIFY2(panel.mButtonConcat->hasFocus(), "Button CONCAT didn't get focus");
+	QTest::keyClick(&mPanel, Qt::Key_Tab);
+	QVERIFY2(mPanel.mButtonConcat->hasFocus(), "Button CONCAT didn't get focus");
 
 	// move focus to next widget
-	QTest::keyClick(&panel, Qt::Key_Tab);
-	QVERIFY2(panel.mButtonCancel->hasFocus(), "Button CANCEL didn't get focus");
+	QTest::keyClick(&mPanel, Qt::Key_Tab);
+	QVERIFY2(mPanel.mButtonCancel->hasFocus(), "Button CANCEL didn't get focus");
 }
 
 void TestPanelConcat::TestFocusUsage()
 {
 	// enables focus and widget events
-	QApplication::setActiveWindow(&panel);
+	QApplication::setActiveWindow(&mPanel);
 
 	// set initial focus
-	panel.mInputA->setFocus();
-	QVERIFY2(panel.mInputA->hasFocus(), "Input A doesn't have focus");
+	mPanel.mInputA->setFocus();
+	QVERIFY2(mPanel.mInputA->hasFocus(), "Input A doesn't have focus");
 
 	// write STR1
 	QTest::keyClicks(QApplication::focusWidget(), STR1);
 
 	// move focus to next widget
-	QTest::keyClick(&panel, Qt::Key_Tab);
-	QVERIFY2(panel.mInputB->hasFocus(), "Input B doesn't have focus");
+	QTest::keyClick(&mPanel, Qt::Key_Tab);
+	QVERIFY2(mPanel.mInputB->hasFocus(), "Input B doesn't have focus");
 
 	// write STR2
 	QTest::keyClicks(QApplication::focusWidget(), STR2);
 
 	// move focus to next widget
-	QTest::keyClick(&panel, Qt::Key_Tab);
-	QVERIFY2(panel.mButtonConcat->hasFocus(), "Button CONCAT doesn't have focus");
+	QTest::keyClick(&mPanel, Qt::Key_Tab);
+	QVERIFY2(mPanel.mButtonConcat->hasFocus(), "Button CONCAT doesn't have focus");
 
 	// press button CONCAT using space
 	QTest::keyClick(QApplication::focusWidget(), Qt::Key_Space);
-	QCOMPARE(panel.mLabelRes->text(), STR_RES);
+	QCOMPARE(mPanel.mLabelRes->text(), STR_RES);
 
 	// move focus to next widget
-	QTest::keyClick(&panel, Qt::Key_Tab);
-	QVERIFY2(panel.mButtonCancel->hasFocus(), "Button CANCEL doesn't have focus");
+	QTest::keyClick(&mPanel, Qt::Key_Tab);
+	QVERIFY2(mPanel.mButtonCancel->hasFocus(), "Button CANCEL doesn't have focus");
 
 	// press button CANCEL using space
 	QTest::keyClick(QApplication::focusWidget(), Qt::Key_Space);
-	QVERIFY2(panel.mInputA->text().isEmpty(), "Cancel didn't work on input A");
-	QVERIFY2(panel.mInputB->text().isEmpty(), "Cancel didn't work on input B");
-	QVERIFY2(panel.mLabelRes->text().isEmpty(), "Cancel didn't work on res label");
+	QVERIFY2(mPanel.mInputA->text().isEmpty(), "Cancel didn't work on input A");
+	QVERIFY2(mPanel.mInputB->text().isEmpty(), "Cancel didn't work on input B");
+	QVERIFY2(mPanel.mLabelRes->text().isEmpty(), "Cancel didn't work on res label");
 }
 
 void TestPanelConcat::TestSignals()
 {
 	// set input
-	panel.mInputA->setText(STR1);
-	panel.mInputB->setText(STR2);
+	mPanel.mInputA->setText(STR1);
+	mPanel.mInputB->setText(STR2);
 
 	// create spy objects
-	QSignalSpy spy1(&panel, &PanelConcat::DataAvailable);
-	QSignalSpy spy2(&panel, &PanelConcat::DataCleared);
+	QSignalSpy spy1(&mPanel, &PanelConcat::DataAvailable);
+	QSignalSpy spy2(&mPanel, &PanelConcat::DataCleared);
 
 	// click button CONCAT
-	QTest::mouseClick(panel.mButtonConcat, Qt::LeftButton);
+	QTest::mouseClick(mPanel.mButtonConcat, Qt::LeftButton);
 
 	QCOMPARE(spy1.count(), 1);
 	QCOMPARE(spy2.count(), 0);
@@ -112,7 +112,7 @@ void TestPanelConcat::TestSignals()
 	QCOMPARE(args.at(0).toString(), STR_RES);
 
 	// click button CANCEL
-	QTest::mouseClick(panel.mButtonCancel, Qt::LeftButton);
+	QTest::mouseClick(mPanel.mButtonCancel, Qt::LeftButton);
 
 	QCOMPARE(spy1.count(), 0);
 	QCOMPARE(spy2.count(), 1);

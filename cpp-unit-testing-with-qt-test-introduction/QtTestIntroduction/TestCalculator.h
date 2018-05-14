@@ -6,20 +6,20 @@
 
 class TestCalculator: public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 private slots:
-    // -- setup/cleanup --
-    void init();
+	// -- setup/cleanup --
+	void init();
 
-    // -- tests --
-    void testConstructor();
-    void testSum();
-
-private:
-    const int A0 = 0;
-    const int B0 = 0;
+	// -- tests --
+	void testConstructor();
+	void testSum();
 
 private:
-    Calculator mCalc;
+	const int A0 = 0;
+	const int B0 = 0;
+
+private:
+	Calculator mCalc;
 };

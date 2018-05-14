@@ -12,7 +12,7 @@ void TestIntBitset::cleanupTestCase()
 
 void TestIntBitset::initTestCase()
 {
-	if(sizeof(int) != 4)
+    if(sizeof(int) != 4)
 		QFAIL("Int size is not 4 on this platform.");
 }
 
@@ -20,7 +20,6 @@ void TestIntBitset::init()
 {
 	// clear the bitset before every test
 	mBS.setAllOff();
-
 }
 
 // -- tests --
