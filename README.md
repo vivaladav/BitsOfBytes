@@ -4,6 +4,9 @@ In this repository you can find source code and projects from my [blog](http://b
 All the content here is released under The Unlicense license unless stated otherwise in a sub-directory.
 
 ## Examples
+### GUI unit testing with Qt Test – part 2 – advanced testing
+[blog post](http://blog.davidecoppola.com/2018/01/gui-unit-testing-with-qt-test-advanced/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/gui-unit-testing-with-qt-test-advanced/GuiUnitTestingAdv)
+
 ### GUI unit testing with Qt Test – part 1 – introduction
 [blog post](http://blog.davidecoppola.com/2018/01/gui-unit-testing-with-qt-test-introduction/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/gui-unit-testing-with-qt-test-introduction/GuiUnitTestingIntro)
 
