@@ -1,0 +1,12 @@
+{
+    \"Name\" : \"QtC Timer\",
+    \"Version\" : \"0.1.0\",
+    \"CompatVersion\" : \"0.1.0\",
+    \"Vendor\" : \"Davide Coppola\",
+    \"Copyright\" : \"(C) Davide Coppola\",
+    \"License\" : \"Unlicense\",
+    \"Description\" : \"Qt Creator timer\",
+    \"Category\" : \"Qt Creator\",
+    \"Url\" : \"http://blog.davidecoppola.com\",
+    $$dependencyList
+}
