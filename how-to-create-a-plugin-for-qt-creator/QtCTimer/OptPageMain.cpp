@@ -3,8 +3,6 @@
 #include "OptPageMainWidget.h"
 #include "Settings.h"
 
-#include <QDebug>
-
 namespace QtCTimer
 {
 
@@ -12,18 +10,11 @@ OptPageMain::OptPageMain(Settings * settings, QObject * parent)
     : IOptionsPage(parent)
     , mSettings(settings)
 {
-    qDebug() << "OptPageMain::OptPageMain()";
-
     setId("QtCTimerSettings");
     setDisplayName("General");
     setCategory("QtC Timer");
     setDisplayCategory("QtC Timer");
     setCategoryIcon(Utils::Icon(":/imgs/icon_timer.png"));
-}
-
-OptPageMain::~OptPageMain()
-{
-    qDebug() << "OptPageMain::~OptPageMain()";
 }
 
 QWidget * OptPageMain::widget()

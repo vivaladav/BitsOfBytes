@@ -15,7 +15,6 @@ class OptPageMainWidget : public QWidget
 
 public:
     explicit OptPageMainWidget(const Settings * settings);
-    ~OptPageMainWidget();
 
     Settings GenerateSettings() const;
 

@@ -10,21 +10,16 @@
 #include <QTime>
 #include <QTimer>
 
-#include <QDebug>
-
 namespace QtCTimer
 {
 
 QtCTimerPlugin::QtCTimerPlugin()
 {
     // Create your members
-    qDebug() << "QtCTimerPlugin::QtCTimerPlugin()";
 }
 
 QtCTimerPlugin::~QtCTimerPlugin()
 {
-    qDebug() << "QtCTimerPlugin::~QtCTimerPlugin()";
-
     // Unregister objects from the plugin manager's object pool
     // Delete members
     delete mTimer;
@@ -64,8 +59,6 @@ void QtCTimerPlugin::OnTimeout()
 
     QTime t(0, 0, 0);
     t = t.addSecs(mSettings->GetTimeLimit() * 60);
-
-    qDebug() << t << " - " << t.toString("hh:mm:ss");
 
     QMessageBox::warning(Core::ICore::mainWindow(),
                          tr("Take a break!"),

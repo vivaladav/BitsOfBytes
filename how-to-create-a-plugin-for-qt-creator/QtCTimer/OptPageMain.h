@@ -14,7 +14,6 @@ class OptPageMain : public Core::IOptionsPage
 
 public:
     OptPageMain(Settings * settings, QObject * parent = nullptr);
-    ~OptPageMain();
 
     QWidget * widget() override;
 

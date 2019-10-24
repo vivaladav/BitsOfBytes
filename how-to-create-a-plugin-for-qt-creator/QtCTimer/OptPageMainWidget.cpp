@@ -8,15 +8,11 @@
 #include <QSpinBox>
 #include <QVBoxLayout>
 
-#include <QDebug>
-
 namespace QtCTimer
 {
 
 OptPageMainWidget::OptPageMainWidget(const Settings * settings)
 {
-    qDebug() << "OptPageMainWidget::OptPageMainWidget()";
-
     QVBoxLayout * layout = new QVBoxLayout(this);
 
     // -- ROW activity time limit --
@@ -36,11 +32,6 @@ OptPageMainWidget::OptPageMainWidget(const Settings * settings)
 
     // -- VERTICAL SPACER --
     layout->addSpacerItem(new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Expanding));
-}
-
-OptPageMainWidget::~OptPageMainWidget()
-{
-    qDebug() << "OptPageMainWidget::~OptPageMainWidget()";
 }
 
 Settings OptPageMainWidget::GenerateSettings() const
