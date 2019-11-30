@@ -85,7 +85,6 @@ ExtensionSystem::IPlugin::ShutdownFlag QtCTimerPlugin::aboutToShutdown()
     // Save settings
     // Disconnect from signals that are not needed during shutdown
     // Hide UI (if you add UI that is not in the main window directly)
-
     mTimer->stop();
     mTimer->disconnect();
 

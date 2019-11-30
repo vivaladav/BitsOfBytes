@@ -10,11 +10,11 @@ OptPageMain::OptPageMain(Settings * settings, QObject * parent)
     : IOptionsPage(parent)
     , mSettings(settings)
 {
-    setId("QtCTimerSettings");
-    setDisplayName("General");
-    setCategory("QtC Timer");
-    setDisplayCategory("QtC Timer");
-    setCategoryIcon(Utils::Icon(":/imgs/icon_timer.png"));
+    setId("QtCTimerSettings");                              // page ID
+    setDisplayName("General");                              // page label in tabs
+    setCategory("QtC Timer");                               // category ID
+    setDisplayCategory("QtC Timer");                        // category label in options - set once
+    setCategoryIcon(Utils::Icon(":/imgs/icon_timer.png"));  // category icon - set once
 }
 
 QWidget * OptPageMain::widget()
@@ -32,12 +32,12 @@ void OptPageMain::apply()
     if(newSettings != *mSettings)
     {
         *mSettings = newSettings;
-
         mSettings->Save();
 
         emit SettingsChanged();
     }
 }
+
 void OptPageMain::finish()
 {
     delete mWidget;

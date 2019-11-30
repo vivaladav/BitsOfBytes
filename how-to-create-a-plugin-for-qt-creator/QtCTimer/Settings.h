@@ -9,7 +9,9 @@ public:
     Settings();
 
     // -- DATA --
+    // get time in minutes
     int GetTimeLimit() const;
+    // set time in minutes
     void SetTimeLimit(int val);
 
     // -- I/O --

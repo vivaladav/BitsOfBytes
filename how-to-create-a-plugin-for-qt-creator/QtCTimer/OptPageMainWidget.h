@@ -19,7 +19,7 @@ public:
     Settings GenerateSettings() const;
 
 private:
-    QSpinBox * mInputTime;
+    QSpinBox * mInputTime = nullptr;
 };
 
 } // namespace QtCTimer

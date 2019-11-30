@@ -37,7 +37,6 @@ OptPageMainWidget::OptPageMainWidget(const Settings * settings)
 Settings OptPageMainWidget::GenerateSettings() const
 {
     Settings settings;
-
     settings.SetTimeLimit(mInputTime->value());
 
     return settings;
