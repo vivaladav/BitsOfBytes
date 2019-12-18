@@ -6,7 +6,7 @@ All the content here is released under The Unlicense license unless stated other
 ## Examples
 
 ### How to create a plugin for Qt Creator
-blog post - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/how-to-create-a-plugin-for-qt-creator)
+[blog post](http://blog.davidecoppola.com/2019/12/how-to-create-a-qt-creator-plugin/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/how-to-create-a-plugin-for-qt-creator)
 
 ### GUI unit testing with Qt Test – part 2 – advanced testing
 [blog post](http://blog.davidecoppola.com/2018/01/gui-unit-testing-with-qt-test-advanced/) - [source code](https://github.com/vivaladav/BitsOfBytes/tree/master/gui-unit-testing-with-qt-test-advanced/GuiUnitTestingAdv)
