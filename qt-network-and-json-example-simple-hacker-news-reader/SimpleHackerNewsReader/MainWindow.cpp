@@ -30,8 +30,7 @@ MainWindow::MainWindow(QWidget * parent)
 
 	const int WIN_W = 1024;
 	const int WIN_H = 550;
-	setMinimumSize(WIN_W, WIN_H);
-	setMaximumSize(WIN_W, WIN_H);
+	setFixedSize(WIN_W, WIN_H);
 
 	// create GUI
 	BuildWindow();
